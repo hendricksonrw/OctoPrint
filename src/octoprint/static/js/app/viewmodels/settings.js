@@ -52,9 +52,10 @@ function SettingsViewModel(loginStateViewModel, usersViewModel) {
     self.folder_timelapseTmp = ko.observable(undefined);
     self.folder_logs = ko.observable(undefined);
 
-    self.cura_enabled = ko.observable(undefined);
-    self.cura_path = ko.observable(undefined);
-    self.cura_config = ko.observable(undefined);
+    self.slicer_which = ko.observable(undefined);
+    self.slicer_path = ko.observable(undefined);
+    self.slicer_config = ko.observable(undefined);
+    self.available_slicers = ko.observable(["None", "Cura", "Slic3r"]);
 
     self.temperature_profiles = ko.observableArray(undefined);
 
@@ -161,9 +162,9 @@ function SettingsViewModel(loginStateViewModel, usersViewModel) {
         self.folder_timelapseTmp(response.folder.timelapseTmp);
         self.folder_logs(response.folder.logs);
 
-        self.cura_enabled(response.cura.enabled);
-        self.cura_path(response.cura.path);
-        self.cura_config(response.cura.config);
+        self.slicer_which(response.slicer.which);
+        self.slicer_path(response.slicer.path);
+        self.slicer_config(response.slicer.config);
 
         self.temperature_profiles(response.temperature.profiles);
 
@@ -230,10 +231,10 @@ function SettingsViewModel(loginStateViewModel, usersViewModel) {
             "system": {
                 "actions": self.system_actions()
             },
-            "cura": {
-                "enabled": self.cura_enabled(),
-                "path": self.cura_path(),
-                "config": self.cura_config()
+            "slicer": {
+                "which": self.slicer_which(),
+                "path": self.slicer_path(),
+                "config": self.slicer_config()
             },
             "terminalFilters": self.terminalFilters()
         };

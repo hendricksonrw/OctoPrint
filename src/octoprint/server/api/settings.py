@@ -86,10 +86,10 @@ def getSettings():
 			"events": s.get(["system", "events"])
 		},
 		"terminalFilters": s.get(["terminalFilters"]),
-		"cura": {
-			"enabled": s.getBoolean(["cura", "enabled"]),
-			"path": s.get(["cura", "path"]),
-			"config": s.get(["cura", "config"])
+		"slicer": {
+			"which": s.get(["slicer", "which"]),
+			"path": s.get(["slicer", "path"]),
+			"config": s.get(["slicer", "config"])
 		}
 	})
 
@@ -172,19 +172,19 @@ def setSettings():
 			if "actions" in data["system"].keys(): s.set(["system", "actions"], data["system"]["actions"])
 			if "events" in data["system"].keys(): s.set(["system", "events"], data["system"]["events"])
 
-		cura = data.get("cura", None)
-		if cura:
-			path = cura.get("path")
-			if path:
-				s.set(["cura", "path"], path)
+		slicer = data.get("slicer", None)
+        if slicer:
+            path = slicer.get("path")
+            if path:
+                s.set(["slicer", "path"], path)
 
-			config = cura.get("config")
-			if config:
-				s.set(["cura", "config"], config)
+            config = slicer.get("config")
+            if config:
+				s.set(["slicer", "config"], config)
+            which = slicer.get("which")
+            if which:
+                s.set(["slicer", "which"], which)
 
-			# Enabled is a boolean so we cannot check that we have a result
-			enabled = cura.get("enabled")
-			s.setBoolean(["cura", "enabled"], enabled)
 
 		s.save()
 

@@ -8,6 +8,7 @@ import yaml
 import logging
 import re
 import uuid
+from slicers.constants import DEFAULT_SLICER
 
 APPNAME="OctoPrint"
 
@@ -114,10 +115,10 @@ default_settings = {
 		"localNetworks": ["127.0.0.0/8"],
 		"autologinAs": None
 	},
-	"cura": {
-		"enabled": False,
-		"path": "/default/path/to/cura",
-		"config": "/default/path/to/your/cura/config.ini"
+	"slicer": {
+		"which": DEFAULT_SLICER,
+		"path": "/default/path/to/slicer",
+		"config": "/default/path/to/your/slicer/config.ini"
 	},
 	"events": {
 		"systemCommandTrigger": {
