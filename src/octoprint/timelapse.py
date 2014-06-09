@@ -190,7 +190,6 @@ class Timelapse(object):
 
 		with self._captureMutex:
 			filename = os.path.join(self._captureDir, "tmp_%05d.jpg" % (self._imageNumber))
-			self._imageNumber += 1
 		self._logger.debug("Capturing image to %s" % filename)
 		captureThread = threading.Thread(target=self._captureWorker, kwargs={"filename": filename})
 		captureThread.daemon = True
@@ -200,6 +199,10 @@ class Timelapse(object):
 		eventManager().fire("CaptureStart", filename);
 		urllib.urlretrieve(self._snapshotUrl, filename)
 		self._logger.debug("Image %s captured from %s" % (filename, self._snapshotUrl))
+
+		if os.path.isfile(filename):
+			self._imageNumber += 1
+
 		eventManager().fire("CaptureDone", filename);
 
 	def _createMovie(self):
